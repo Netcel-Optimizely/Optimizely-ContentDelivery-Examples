@@ -1,9 +1,12 @@
 using Alloy_Vanilla.Extensions;
 using EPiServer.Cms.Shell;
 using EPiServer.Cms.UI.AspNetIdentity;
+using EPiServer.ContentApi.Cms.Internal;
+using EPiServer.ContentApi.Core.Configuration;
 using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
+using Newtonsoft.Json;
 
 namespace Alloy_Vanilla;
 
@@ -41,6 +44,30 @@ public class Startup
             options.Cookie.HttpOnly = true;
             options.Cookie.IsEssential = true;
         });
+
+        services.AddContentDeliveryApi(o =>
+        {
+            o.SiteDefinitionApiEnabled = false;
+            o.DisableScopeValidation = true;
+        });
+
+        // Content API Options
+        services.Configure<ContentApiOptions>(o =>
+        {
+            o.ExpandedBehavior = ExpandedLanguageBehavior.RequestedLanguage;
+            o.FlattenPropertyModel = true;
+            o.EnablePreviewFeatures = true;
+            o.EnablePreviewMode = true;
+            o.ForceAbsolute = false;
+            o.ValidateTemplateForContentUrl = false;
+            o.IncludeEmptyContentProperties = false;
+            o.IncludeMasterLanguage = false;
+        });
+
+        // Ignore properties which return null values
+        services.ConfigureContentDeliveryApiSerializer(o =>
+            o.NullValueHandling = NullValueHandling.Ignore);
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

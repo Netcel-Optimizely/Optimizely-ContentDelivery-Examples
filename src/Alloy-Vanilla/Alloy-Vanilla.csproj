@@ -22,4 +22,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Translations\**\*" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Netcel.ContentDelivery\Netcel.ContentDelivery.csproj" />
+  </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ using EPiServer.ContentApi.Core.Configuration;
 using EPiServer.Scheduler;
 using EPiServer.ServiceLocation;
 using EPiServer.Web.Routing;
+using Netcel.ContentDelivery.Extensions;
 using Newtonsoft.Json;
 
 namespace Alloy_Vanilla;
@@ -67,6 +68,9 @@ public class Startup
         // Ignore properties which return null values
         services.ConfigureContentDeliveryApiSerializer(o =>
             o.NullValueHandling = NullValueHandling.Ignore);
+
+        // Add Content Delivery Customisations 
+        services.AddContentDeliveryApiCustomization();
 
     }
 

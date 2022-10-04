@@ -21,9 +21,14 @@ namespace Netcel.ContentDelivery.Extensions
         public static void AddContentDeliveryApiCustomization(this IServiceCollection services)
         {
             services.AddSingleton<PageContentConvertor>();
+            services.AddSingleton<BlockContentConvertor>();
+
             services.TryAddEnumerable(ServiceDescriptor.Scoped<IContentApiModelConvertor, PageDataApiModelConvertor>());
 
             services.TryAddEnumerable(ServiceDescriptor.Singleton<IContentConverterProvider, PageContentConvertorProvider>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IContentConverterProvider, BlockContentConvertorProvider>());
+
+
         }
     }
 }

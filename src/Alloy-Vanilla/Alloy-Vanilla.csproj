@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_").Replace("-","_"))</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

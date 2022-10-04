@@ -29,36 +29,37 @@ namespace Netcel.ContentDelivery.ContentApiModelConvertors
 
         public void Convert(IContent content, ContentApiModel contentApiModel, ConverterContext converterContext)
         {
-            if (content is not PageData)
+            if (content is not PageData pageData)
             {
                 return;
             }
 
             // add navigation
             var navigation = new List<NavigationItem>();
-            var children = _contentLoader.GetChildren<IContent>(content.ContentLink);
-            navigation.AddRange(children.Select(x => CreateNavigationStructure(x, content)));
+            var children = _contentLoader.GetChildren<PageData>(content.ContentLink);
+            navigation.AddRange(children.Select(x => CreateNavigationStructure(x, pageData)));
             contentApiModel.Properties.Add("ChildPages", navigation);
 
 
         }
 
-        private NavigationItem CreateNavigationStructure(IContent page, IContent currentContent)
+        private NavigationItem CreateNavigationStructure(PageData page, IContent currentContent)
         {
             var model = CreateNavigationItem(page, currentContent);
-            var children = _contentLoader.GetChildren<IContent>(page.ContentLink);
+            var children = _contentLoader.GetChildren<PageData>(page.ContentLink);
             model.Children = children.Select(x => CreateNavigationStructure(x, currentContent));
 
             return model;
         }
 
-        private NavigationItem CreateNavigationItem(IContent pageContent, IContent currentContent)
+        private NavigationItem CreateNavigationItem(PageData pageContent, IContent currentContent)
         {
             return new NavigationItem
             {
                 Title = pageContent.Name,
                 Url = _urlResolver.GetUrl(pageContent.ContentLink),
-                IsSelected = pageContent.ContentLink == currentContent.ContentLink
+                IsSelected = pageContent.ContentLink == currentContent.ContentLink,
+                VisibleInMenu = pageContent.VisibleInMenu,
             };
         }
     }

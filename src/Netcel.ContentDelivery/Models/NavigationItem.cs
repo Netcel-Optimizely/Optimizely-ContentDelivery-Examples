@@ -23,6 +23,11 @@ namespace Netcel.ContentDelivery.Models
         /// </summary>
         public bool IsSelected { get; set; }
 
+        /// <summary>
+        /// Is Visibly in Menu Property Set
+        /// </summary>
+        public bool VisibleInMenu { get; set; }
+
         public IEnumerable<NavigationItem> Children { get; set; } = Enumerable.Empty<NavigationItem>();
     }
 }

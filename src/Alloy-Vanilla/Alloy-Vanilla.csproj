@@ -14,9 +14,11 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="EPiServer.CMS" Version="12.12.0" />
+    <PackageReference Include="EPiServer.CMS" Version="12.13.1" />
     <PackageReference Include="EPiServer.ContentDeliveryApi.Cms" Version="3.5.0" />
     <PackageReference Include="EPiServer.ContentDeliveryApi.Core" Version="3.5.0" />
+    <PackageReference Include="EPiServer.Framework" Version="12.9.3" />
+    <PackageReference Include="EPiServer.Hosting" Version="12.9.3" />
     <PackageReference Include="Wangkanai.Detection" Version="5.2.0" />
   </ItemGroup>
   
@@ -25,6 +27,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\ContentCloud.Domain\ContentCloud.Domain.csproj" />
     <ProjectReference Include="..\Netcel.ContentDelivery\Netcel.ContentDelivery.csproj" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-﻿using EPiServer.ContentApi.Core.Serialization;
+﻿using ContentCloud.Domain.PropertySerialization;
+using EPiServer.ContentApi.Core.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Netcel.ContentDelivery.ContentApiModelConvertors;
@@ -27,6 +28,9 @@ namespace Netcel.ContentDelivery.Extensions
 
             services.TryAddEnumerable(ServiceDescriptor.Singleton<IContentConverterProvider, PageContentConvertorProvider>());
             services.TryAddEnumerable(ServiceDescriptor.Singleton<IContentConverterProvider, BlockContentConvertorProvider>());
+
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPropertyConverterProvider, ListPropertyConvertorProvider>());
+            services.TryAddScoped<BenefitItemListPropertyConvertor>();
 
 
         }
